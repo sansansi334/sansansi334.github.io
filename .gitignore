@@ -7,3 +7,6 @@ Thumbs.db
 # Cloudflare 部署配置，只在本机使用，不属于网站内容
 wrangler.jsonc
 .assetsignore
+
+# 本地发布脚本，不需要上传到网站
+发布更新.bat
