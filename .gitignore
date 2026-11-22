@@ -1,0 +1,9 @@
+# wrangler 本地缓存（含账号信息，不要提交）
+.wrangler/
+node_modules/
+.DS_Store
+Thumbs.db
+
+# Cloudflare 部署配置，只在本机使用，不属于网站内容
+wrangler.jsonc
+.assetsignore

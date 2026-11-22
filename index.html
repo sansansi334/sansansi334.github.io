@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>陈浩宁个人作品集. | Creative Portfolio</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', 'Noto Sans SC', sans-serif;
+      background: #F3F2EE;
+      color: #252522;
+    }
+
+    .serif {
+      font-family: Georgia, serif;
+    }
+
+    .project-image img,
+    .project-image video {
+      transition: transform .5s ease;
+    }
+
+    .project-image:hover img,
+    .project-image:hover video {
+      transform: scale(1.035);
+    }
+
+    .case-content {
+      display: none;
+    }
+
+    .case-content.active {
+      display: block;
+    }
+
+    .nav-link:hover {
+      color: #99968D;
+    }
+
+    video {
+      display: block;
+      width: 100%;
+      background: #171715;
+    }
+
+    ::selection {
+      background: #B8B4A9;
+      color: #252522;
+    }
+
+    /* Hero：自由散落式奖状墙 */
+    .award-stage {
+      position: relative;
+      min-height: 420px;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        radial-gradient(circle at 20% 25%, rgba(255,255,255,.85), transparent 35%),
+        linear-gradient(135deg, #e7e5de, #d8d6ce);
+      cursor: default;
+    }
+    .award-card {
+      position: absolute;
+      width: clamp(112px, 18%, 205px);
+      aspect-ratio: 1.414 / 1;
+      padding: 10px;
+      background: #faf9f5;
+      border: 1px solid rgba(80,78,70,.18);
+      box-shadow: 0 14px 35px rgba(37,37,34,.16);
+      animation: awardFloat var(--duration, 8s) ease-in-out infinite alternate;
+      animation-delay: var(--delay, 0s);
+      transform: rotate(var(--rotation, 0deg));
+      transition: box-shadow .3s ease, scale .3s ease, z-index .3s ease;
+      z-index: var(--layer, 1);
+    }
+
+    /* 真实奖状图片样式 */
+    .award-card img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #fff;
+    }
+
+    .award-card:hover {
+      z-index: 20;
+      box-shadow: 0 22px 48px rgba(37,37,34,.25);
+      scale: 1.06;
+    }
+
+    .award-paper {
+      height: 100%;
+      border: 1px solid #c9b98f;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #625b4d;
+      padding: 8px;
+      background: linear-gradient(145deg, #fffefa, #f3f0e7);
+    }
+    .award-paper::before {
+      content: "";
+      width: 25px;
+      height: 3px;
+      background: #b7a477;
+      margin-bottom: 8px;
+    }
+    .award-paper strong {
+      font-family: Georgia, serif;
+      font-size: clamp(9px, 1.2vw, 15px);
+      letter-spacing: .12em;
+      font-weight: 500;
+    }
+    .award-paper span {
+      margin-top: 6px;
+      font-size: clamp(6px, .65vw, 9px);
+      letter-spacing: .12em;
+      color: #92866b;
+    }
+    .award-paper small {
+      margin-top: 9px;
+      font-size: clamp(6px, .65vw, 8px);
+      color: #8b877d;
+    }
+    .award-stage:hover .award-card {
+      animation-play-state: paused;
+    }
+    @keyframes awardFloat {
+      0% { translate: 0 0; }
+      50% { translate: 0 -13px; }
+      100% { translate: 0 9px; }
+    }
+
+    /* 手机端九张奖状 3×3 整齐排布 */
+    @media (max-width: 767px) {
+      .award-stage { min-height: 330px; }
+      .award-card { width: 29%; padding: 6px; }
+      .award-stage:hover .award-card { animation-play-state: running; }
+
+      .award-card:nth-of-type(1) { left: 3% !important; top: 10% !important; }
+      .award-card:nth-of-type(2) { left: 35% !important; top: 10% !important; }
+      .award-card:nth-of-type(3) { left: 67% !important; top: 10% !important; }
+      .award-card:nth-of-type(4) { left: 3% !important; top: 38% !important; }
+      .award-card:nth-of-type(5) { left: 35% !important; top: 38% !important; }
+      .award-card:nth-of-type(6) { left: 67% !important; top: 38% !important; }
+      .award-card:nth-of-type(7) { left: 3% !important; top: 66% !important; }
+      .award-card:nth-of-type(8) { left: 35% !important; top: 66% !important; }
+      .award-card:nth-of-type(9) { left: 67% !important; top: 66% !important; }
+    }
+
+    /* Works 分类标题 */
+    .category-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-top: 2px solid #252522;
+      padding-top: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- =====================================
+     NAVIGATION
+===================================== -->
+
+<header class="fixed top-0 left-0 w-full z-50 bg-[#F3F2EE]/95 backdrop-blur-sm border-b border-[#DDDBD4]">
+
+  <nav class="max-w-7xl mx-auto px-6 md:px-12 h-16 flex items-center justify-between">
+
+    <a href="#home" class="text-lg font-bold tracking-widest">
+      陈浩宁个人作品展示<span class="text-[#99968D]">.</span>
+    </a>
+
+    <div class="hidden md:flex items-center gap-8 text-xs tracking-widest">
+      <a href="#about" class="nav-link">ABOUT关于</a>
+      <a href="#works" class="nav-link">WORKS作品</a>
+      <a href="#contact" class="nav-link">CONTACT联系</a>
+    </div>
+
+    <a href="#contact"
+       class="text-xs tracking-widest border border-[#252522] px-4 py-2 hover:bg-[#252522] hover:text-white transition">
+      LET'S TALK ↗
+    </a>
+
+  </nav>
+
+</header>
+
+
+<!-- =====================================
+     HERO
+===================================== -->
+
+<section id="home" class="pt-36 md:pt-48 pb-20 px-6 md:px-12">
+
+  <div class="max-w-7xl mx-auto">
+
+    <p class="text-xs tracking-[0.3em] text-[#89877F] mb-8">
+      CREATIVE PORTFOLIO / 2026
+    </p>
+
+    <div class="grid md:grid-cols-12 gap-8 items-end">
+
+      <div class="md:col-span-9">
+
+        <h1 class="text-6xl md:text-8xl lg:text-[120px] leading-[0.95] tracking-tight font-medium">
+          Ideas become<br>
+          <span class="serif italic font-normal">something real.</span>
+        </h1>
+
+      </div>
+
+      <div class="md:col-span-3 md:pb-3">
+
+        <p class="text-sm text-[#77766F] leading-8">
+          让创意不止于想象。<br>
+          用策略思考品牌，用创意连接人群。
+        </p>
+
+      </div>
+
+    </div>
+
+    <div class="mt-12 flex flex-col md:flex-row md:items-center justify-between gap-8">
+
+      <p class="text-sm tracking-wide text-[#77766F]">
+        广告学 ｜ 整合营销传播 ｜ 品牌创意 ｜ AI影像创作
+      </p>
+
+      <div class="flex gap-4">
+
+        <a href="#works"
+           class="px-7 py-3 bg-[#252522] text-white text-xs tracking-widest hover:bg-[#55544F] transition">
+          查看作品 ↗
+        </a>
+
+        <!-- 替换为自己的简历文件 -->
+        <a href="assets/resume.pdf" download
+           class="px-7 py-3 border border-[#252522] text-xs tracking-widest hover:bg-[#252522] hover:text-white transition">
+          下载简历 ↓
+        </a>
+
+      </div>
+
+    </div>
+
+    <!-- 首页奖状展示区 -->
+    <div class="mt-20 award-stage" aria-label="奖状展示区域，鼠标悬停可暂停动画">
+      <div class="absolute top-6 left-6 z-30 text-[10px] tracking-[0.25em] text-[#77766F]">
+        AWARDS & RECOGNITION
+      </div>
+      <div class="absolute bottom-6 left-6 z-30 text-[10px] tracking-widest text-[#77766F]">
+        A COLLECTION OF MILESTONES
+      </div>
+
+      <!-- 9张奖状，不同位置、角度、动画 -->
+      <div class="award-card" style="--rotation:-13deg;--duration:7s;--delay:-2s;--layer:2;left:5%;top:15%;">
+        <img src="assets/images/awards/award-01.png" alt="获奖证书 01">
+      </div>
+      <div class="award-card" style="--rotation:9deg;--duration:9s;--delay:-5s;--layer:4;left:22%;top:8%;">
+        <img src="assets/images/awards/award-02.png" alt="获奖证书 02">
+      </div>
+      <div class="award-card" style="--rotation:-5deg;--duration:8s;--delay:-1s;--layer:3;left:41%;top:22%;">
+        <img src="assets/images/awards/award-03.png" alt="获奖证书 03">
+      </div>
+      <div class="award-card" style="--rotation:14deg;--duration:10s;--delay:-6s;--layer:2;left:60%;top:10%;">
+        <img src="assets/images/awards/award-04.png" alt="获奖证书 04">
+      </div>
+      <div class="award-card" style="--rotation:-10deg;--duration:8.5s;--delay:-3s;--layer:5;left:78%;top:28%;">
+        <img src="assets/images/awards/award-05.png" alt="获奖证书 05">
+      </div>
+      <div class="award-card" style="--rotation:7deg;--duration:9.5s;--delay:-4s;--layer:1;left:10%;top:55%;">
+        <img src="assets/images/awards/award-06.png" alt="获奖证书 06">
+      </div>
+      <div class="award-card" style="--rotation:-16deg;--duration:7.5s;--delay:-1.5s;--layer:3;left:45%;top:58%;">
+        <img src="assets/images/awards/award-07.png" alt="获奖证书 07">
+      </div>
+      <div class="award-card" style="--rotation:11deg;--duration:8.8s;--delay:-3.5s;--layer:2;left:68%;top:62%;">
+        <img src="assets/images/awards/award-08.png" alt="获奖证书 08">
+      </div>
+      <div class="award-card" style="--rotation:4deg;--duration:9.2s;--delay:-6.5s;--layer:1;left:28%;top:65%;">
+        <img src="assets/images/awards/award-09.png" alt="获奖证书 09">
+      </div>
+    </div>
+
+    <div class="flex justify-between mt-5 text-[10px] tracking-widest text-[#99968D]">
+      <span>SELECTED WORKS & PERSONAL PROJECTS</span>
+      <span>SCROLL TO EXPLORE ↓</span>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =====================================
+     ABOUT
+===================================== -->
+
+<section id="about" class="py-28 px-6 md:px-12 bg-[#E9E8E2]">
+
+  <div class="max-w-7xl mx-auto">
+
+    <div class="flex justify-between items-center border-b border-[#CBC9C1] pb-5 mb-16">
+
+      <h2 class="text-xs tracking-[0.3em]">01 / ABOUT ME</h2>
+
+      <span class="text-xs text-[#89877F]">关于我</span>
+
+    </div>
+
+    <div class="grid md:grid-cols-12 gap-12">
+
+      <div class="md:col-span-7">
+
+        <p class="text-3xl md:text-5xl leading-tight">
+          I'm a thinker,<br>
+          <span class="serif italic text-[#89877F]">a creator</span><br>
+          and a storyteller.
+        </p>
+
+        <div class="mt-12 max-w-xl text-sm leading-8 text-[#68675F]">
+
+          <p>
+            你好，我是一名广告学专业的创意实践者。
+            对品牌、传播、影像与视觉设计保持持续的好奇心。
+          </p>
+
+          <p class="mt-5">
+            我相信好的广告不只是传递信息，
+            更是通过洞察找到人与品牌之间的情感连接。
+            希望将策略思考与创意表达结合，
+            创造有价值、有记忆点的传播内容。
+          </p>
+
+          <p class="mt-5">
+            同时，我也在探索 AI 技术与视觉叙事的结合，
+            尝试通过 AI 漫剧、动画短剧等形式，
+            拓展传统内容创作的表达边界。
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="md:col-span-5 space-y-10">
+
+        <!-- EDUCATION -->
+
+        <div>
+
+          <h3 class="text-xs tracking-widest text-[#99968D] mb-5">
+            EDUCATION
+          </h3>
+
+          <div class="border-t border-[#CBC9C1] pt-5">
+
+            <div class="flex justify-between text-sm">
+
+              <span class="font-medium">重庆交通大学</span>
+
+              <span class="text-[#89877F]">2027</span>
+
+            </div>
+            <p class="text-sm text-[#77766F] mt-2">
+              新闻传播学系 广告学 / 本科
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- COMPETITIONS -->
+
+        <div>
+
+          <h3 class="text-xs tracking-widest text-[#99968D] mb-5">
+            COMPETITIONS
+          </h3>
+
+          <div class="border-t border-[#CBC9C1] pt-5 space-y-4 text-sm">
+
+            <div class="flex justify-between gap-4">
+              <span>全国大学生广告艺术大赛</span>
+              <span class="text-[#89877F]">国家级一等奖</span>
+            </div>
+
+            <div class="flex justify-between gap-4">
+              <span>中国国际大学生创新大赛</span>
+              <span class="text-[#89877F]">国家级二等奖</span>
+            </div>
+
+            <div class="flex justify-between gap-4">
+              <span>中国青年创新大赛(社会企业组)</span>
+              <span class="text-[#89877F]">国家级三等奖</span>
+            </div>
+            <div class="flex justify-between gap-4">
+              <span>其他省部级奖项</span>
+              <span class="text-[#89877F]">若干</span>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- SKILLS -->
+
+        <div>
+
+          <h3 class="text-xs tracking-widest text-[#99968D] mb-5">
+            SKILLS & TOOLS
+          </h3>
+
+          <div class="flex flex-wrap gap-2">
+
+            <span class="border border-[#C8C6BE] px-4 py-2 text-xs">Photoshop</span>
+            <span class="border border-[#C8C6BE] px-4 py-2 text-xs">Illustrator</span>
+            <span class="border border-[#C8C6BE] px-4 py-2 text-xs">After Effects</span>
+            <span class="border border-[#C8C6BE] px-4 py-2 text-xs">Premiere Pro</span>
+            <span class="border border-[#C8C6BE] px-4 py-2 text-xs">Davinci Resolve</span>
+            <span class="border border-[#C8C6BE] px-4 py-2 text-xs">游戏美术设计（中级）证书</span>
+            <span class="border border-[#C8C6BE] px-4 py-2 text-xs">AI  Generation</span>
+            <span class="border border-[#C8C6BE] px-4 py-2 text-xs">Marketing Strategy</span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================
+     WORKS（四大分类，AI 漫剧已并入本区块）
+===================================== -->
+
+<section id="works" class="py-28 px-6 md:px-12">
+
+  <div class="max-w-7xl mx-auto">
+
+    <div class="flex justify-between items-center border-b border-[#D8D6CF] pb-5 mb-16">
+
+      <h2 class="text-xs tracking-[0.3em]">02 / SELECTED WORKS</h2>
+
+      <span class="text-xs text-[#89877F]">精选作品</span>
+
+    </div>
+
+    <div class="flex flex-col md:flex-row justify-between mb-20 gap-4">
+
+      <h3 class="text-3xl md:text-5xl">
+        Selected projects<span class="serif italic text-[#99968D]">.</span>
+      </h3>
+
+      <p class="text-sm text-[#89877F] self-end">
+        Brand / Campaign / Visual / AI Animation
+      </p>
+
+    </div>
+
+
+    <!-- ============================
+         CATEGORY 01 品牌营销与整合营销传播
+         ============================ -->
+    <div class="mb-24">
+
+      <div class="category-head">
+        <p class="text-xs tracking-[0.3em] text-[#99968D]">CATEGORY 01 — BRAND & IMC</p>
+        <h4 class="text-xl md:text-2xl font-medium">品牌营销与整合营销传播</h4>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-x-8 gap-y-16">
+
+        <!-- 项目 01 -->
+        <article>
+          <a href="assets/pdf/project-01-1.pdf" target="_blank" class="w-full text-left block group">
+            <div class="project-image overflow-hidden bg-[#E9E8E2]">
+              <img
+                src="assets/images/projects/project-01-1cover.jpg"
+                class="w-full h-[300px] md:h-[390px] object-cover"
+                alt="阿里云X千问 整合营销方案"
+              >
+            </div>
+            <div class="flex justify-between items-start mt-6">
+              <div>
+                <p class="text-[10px] tracking-widest text-[#99968D] mb-3">
+                  01 / 品牌策划案
+                </p>
+                <h4 class="text-xl group-hover:text-[#99968D] transition">阿里云X千问 整合营销方案</h4>
+              </div>
+              <span class="text-xl transition group-hover:translate-x-1">↗</span>
+            </div>
+          </a>
+        </article>
+
+        <!-- 项目 02 -->
+        <article>
+          <a href="assets/pdf/project-01-2.pdf" target="_blank" class="w-full text-left block group">
+            <div class="project-image overflow-hidden bg-[#E9E8E2]">
+              <img
+                src="assets/images/projects/project-01-2cover.jpg"
+                class="w-full h-[300px] md:h-[390px] object-cover"
+                alt="长安CS系列用户运营方案"
+              >
+            </div>
+            <div class="flex justify-between items-start mt-6">
+              <div>
+                <p class="text-[10px] tracking-widest text-[#99968D] mb-3">
+                  02 / 品牌策划案
+                </p>
+                <h4 class="text-xl group-hover:text-[#99968D] transition">长安CS系列用户运营方案</h4>
+              </div>
+              <span class="text-xl transition group-hover:translate-x-1">↗</span>
+            </div>
+          </a>
+        </article>
+
+      </div>
+
+    </div>
+
+
+    <!-- ============================
+         CATEGORY 02 广告创意与视觉设计
+         ============================ -->
+    <!-- 项目 02-1 : 娃哈哈系列海报 -->
+        <div class="mb-24">
+
+      <div class="category-head">
+        <p class="text-xs tracking-[0.3em] text-[#99968D]">CATEGORY 02 — CREATIVE & VISUAL</p>
+        <h4 class="text-xl md:text-2xl font-medium">广告创意与视觉设计</h4>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-x-8 gap-y-16">
+
+<article>
+  <a href="project-02-1.html" target="_blank" class="w-full text-left block group">
+    <div class="project-image overflow-hidden bg-[#E9E8E2]">
+      <img
+        src="assets/images/projects/wahaha1.jpg"
+        class="w-full h-[300px] md:h-[390px] object-cover"
+        alt="娃哈哈品牌周年系列海报"
+      >
+    </div>
+    <div class="flex justify-between items-start mt-6">
+      <div>
+        <p class="text-[10px] tracking-widest text-[#99968D] mb-3">
+          03 / 
+        </p>
+        <h4 class="text-xl group-hover:text-[#99968D] transition">娃哈哈品牌周年系列海报</h4>
+        <p class="text-xs text-[#89877F] mt-2">
+          创意概念 · 内容营销 · 视觉设计
+        </p>
+      </div>
+      <span class="text-xl transition group-hover:translate-x-1">↗</span>
+    </div>
+  </a>
+</article>
+<!-- 项目 02-2 : 福彩年龄日历公益海报 -->
+<article>
+  <a href="project-02-2.html" target="_blank" class="w-full text-left block group">
+    <div class="project-image overflow-hidden bg-[#E9E8E2]">
+      <img
+        src="assets/images/projects/fucai-01.png"
+        class="w-full h-[300px] md:h-[390px] object-cover"
+        alt="福彩「年龄日历」公益系列海报"
+      >
+    </div>
+    <div class="flex justify-between items-start mt-6">
+      <div>
+        <p class="text-[10px] tracking-widest text-[#99968D] mb-3">
+          04 / 
+        </p>
+        <h4 class="text-xl group-hover:text-[#99968D] transition">福彩《福，不是从天而降——幸福发生的号码》公益系列海报</h4>
+        <p class="text-xs text-[#89877F] mt-2">
+          公益广告 · 创意概念 · 视觉设计
+        </p>
+      </div>
+      <span class="text-xl transition group-hover:translate-x-1">↗</span>
+    </div>
+  </a>
+</article>
+        </div>
+
+
+
+
+    <!-- ============================
+         CATEGORY 03 AI 漫剧与动画短剧
+         ============================ -->
+    <div class="mb-24">
+
+      <div class="category-head">
+        <p class="text-xs tracking-[0.3em] text-[#99968D]">CATEGORY 03 — AI ANIMATION</p>
+        <h4 class="text-xl md:text-2xl font-medium">AI 漫剧与动画短剧</h4>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-x-8 gap-y-16">
+
+        <!-- 项目 04 : AI SHORT FILM -->
+        <!-- 项目 05 :AI微短剧「石中信」 -->
+<article>
+  <a href="project-03-1.html" target="_blank" class="w-full text-left block group">
+    <div class="project-image overflow-hidden bg-[#171715]">
+      <img
+        src="assets/images/projects/project-03-1.png"
+        class="w-full h-[300px] md:h-[390px] object-cover"
+        alt="AI漫剧作品"
+      >
+    </div>
+    <div class="flex justify-between items-start mt-6">
+      <div>
+        <p class="text-[10px] tracking-widest text-[#99968D] mb-3">
+          05 / AI ANIMATION
+        </p>
+        <h4 class="text-xl group-hover:text-[#99968D] transition">AI微短剧「石中信」</h4>
+        <p class="text-xs text-[#89877F] mt-2">
+          故事编剧 · AI生成 · 动画短片
+        </p>
+      </div>
+      <span class="text-xl transition group-hover:translate-x-1">↗</span>
+    </div>
+  </a>
+</article>
+
+
+      </div>
+
+    </div>
+
+
+<!-- =====================================
+     CONTACT
+===================================== -->
+
+<section id="contact" class="py-28 px-6 md:px-12 bg-[#E9E8E2]">
+
+  <div class="max-w-7xl mx-auto">
+
+    <div class="flex justify-between items-center border-b border-[#CBC9C1] pb-5 mb-20">
+
+      <h2 class="text-xs tracking-[0.3em]">03 / CONTACT</h2>
+
+      <span class="text-xs text-[#89877F]">保持联系</span>
+
+    </div>
+
+    <p class="text-xs tracking-[0.3em] text-[#89877F] mb-8">
+      HAVE A PROJECT IN MIND?
+    </p>
+
+    <h2 class="text-6xl md:text-8xl serif italic leading-tight">
+      Let's talk<span class="text-[#99968D]">.</span>
+    </h2>
+
+    <p class="text-sm text-[#77766F] mt-8 leading-8">
+      感谢你花时间了解我的作品。<br>
+      期待未来有机会一起创造一些有意思的东西。
+    </p>
+
+
+    <div class="grid md:grid-cols-3 gap-12 mt-24 border-t border-[#CBC9C1] pt-10">
+
+
+      <div>
+
+        <p class="text-xs tracking-widest text-[#99968D] mb-5">
+          EMAIL
+        </p>
+
+        <a href="mailto:yourname@email.com"
+           class="text-sm hover:text-[#99968D] transition">
+          1733639106@qq.com ↗
+        </a>
+
+      </div>
+
+
+      <div>
+
+        <p class="text-xs tracking-widest text-[#99968D] mb-5">
+          WECHAT
+        </p>
+
+        <p class="text-sm">
+          19993943071
+        </p>
+
+      </div>
+
+
+      
+
+      </div>
+
+    </div>
+
+
+    <div class="mt-32 pt-6 border-t border-[#CBC9C1] flex flex-col md:flex-row justify-between gap-4 text-[10px] tracking-widest text-[#99968D]">
+
+      <span>© 2026 VERAX. ALL RIGHTS RESERVED.</span>
+
+      <a href="#home" class="hover:text-[#252522] transition">
+        BACK TO TOP ↑
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================
+     JAVASCRIPT
+===================================== -->
+
+<script>
+
+  // 展开 / 收起作品详情（同一时间只展开一个）
+  function toggleCase(id) {
+
+    const target = document.getElementById(id);
+
+    const isOpen = target.classList.contains('active');
+
+    document.querySelectorAll('.case-content').forEach(item => {
+      item.classList.remove('active');
+    });
+
+    if (!isOpen) {
+      target.classList.add('active');
+    }
+
+  }
+
+</script>
+
+</body>
+</html>
