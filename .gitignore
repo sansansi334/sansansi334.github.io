@@ -10,3 +10,4 @@ wrangler.jsonc
 
 # 本地发布脚本，不需要上传到网站
 发布更新.bat
+同步远端.bat
